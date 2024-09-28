@@ -101,7 +101,7 @@ Remember to read each iteration description carefully before working on the solu
 ### Iteration 1: All directors
 
 We need to get the array of all directors. Since this is a warm up, we will give you a hint: you have to _map_ through the array of movies and get all the directors into one array as a final result. Go ahead and create a function named `getAllDirectors()` that receives an array of movies as an argument and returns a new (_mapped_) array.
-
+  
 <br>
 
 #### Bonus - Iteration 1.1: _Clean_ the array of directors
