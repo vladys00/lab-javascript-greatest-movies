@@ -40,37 +40,65 @@ function scoresAverage(moviesArray) {
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
-    const dramaFiltered = moviesArray.filter(function (object){
-        if (dramaFiltered === 0) {
-            return 0;
-        }
-        return object.genre.includes("Drama");
-    })
-    const totalDramaScore = dramaFiltered.reduce(function (curr, object){
-        
+   const dramaMovies = moviesArray.filter(function (element){
+    return element.genre.includes("Drama");
+   })
 
-            return curr + (object.score || 0);
-        
-    },0)
-
-    console.log(totalDramaScore)
-
-
-    const average = totalDramaScore / dramaFiltered.length;
-
-    return Number(average.toFixed(2))
-
-    
+    return scoresAverage(dramaMovies);
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) {}
+function orderByYear(moviesArray) {
+    const orderedArray = [...moviesArray];
+
+    orderedArray.sort(function (a,b){
+        if (a.year === b.year){
+            return a.title.localeCompare(b.title);
+        }
+        return a.year - b.year;
+    })
+
+    return orderedArray;
+}
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(moviesArray) {
+    const titlesArray = moviesArray.map(movie => movie.title
+    );
+    const orderedArray = titlesArray.sort((a, b) => a.localeCompare(b));
+    if (orderedArray.length < 20){
+        return orderedArray
+    }
+    return orderedArray.slice(0,20)
+  }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+function turnHoursToMinutes(moviesArray) {
+    function convertDurationToMinutes(duration) {
+        // Use a regular expression to match hours and minutes
+        const regex = /(\d+)h\s*(\d+)min/;
+        const matches = duration.match(regex);
+        
+        // If matches are found, calculate the total minutes
+        if (matches) {
+            const hours = parseInt(matches[1], 10); // First capture group (hours)
+            const minutes = parseInt(matches[2], 10); // Second capture group (minutes)
+            
+            // Calculate total minutes
+            return hours * 60 + minutes;
+        }
+        
+        // Return 0 if the format doesn't match
+        return 0;
+    }
+    const arrayCopy = moviesArray.map(function (element){
+        const hoursToMin = convertDurationToMinutes(element.duration);
+        return element.duration = hoursToMin;
+    });
+
+    return arrayCopy;
+    
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
